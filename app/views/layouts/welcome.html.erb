@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QuizMaker</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <div id="header">
+    <h5>QuizMaker Admin</h5>
+  </div>
+  <div class="breadcrumb"></div>
+  <% if logged_in? %>
+    <p>Logged in as <strong><%= current_user.username %></strong> |
+    <%= link_to "Log out", logout_path, method: :delete %> |
+    <%= link_to "Profile", user_path(current_user)%></p>
+  <% end %>
+
+</head>
+<body>
+  <div id="main">
+    <% if !flash[:notice].blank? %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+      <div id="content">
+        <%= yield %>
+      </div>
+  </div>
+
+  <div id="footer">
+    <!--empty for now-->
+  </div>
+
+  <%= debug(params) if Rails.env.development? %>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<h1>Make a New Quiz</h1>
+
+<br/>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div style="width: 300px">
+      <%= form_for [:user, @quiz], url: user_quizzes_path(:user_id => current_user.id) do |f| %>
+
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+
+        <div class="form-buttons">
+          <%= submit_tag "Create Quiz", class: "btn btn-primary" %>
+        </div>
+        <div class="cancel_link">
+          <%= link_to "Cancel", :back %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

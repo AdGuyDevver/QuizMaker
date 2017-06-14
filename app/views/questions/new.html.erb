@@ -1,0 +1,22 @@
+
+<h2>New Question for Quiz # <%= @question.quiz_id %></h2>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div style="width: 300px">
+      <%= form_for [:user, @question], url: {action: "create", :quiz_id => @question.quiz_id, :user_id => current_user.id} do |f| %>
+
+        <%= render(:partial => "form", :locals => {:f => f}) %>
+
+          <div class="form-buttons">
+            <%= submit_tag "Create New Question", class: "btn btn-primary" %>
+          </div>
+          <div class="cancel_link">
+            <%= link_to "Cancel", :back %>
+          </div>
+        <br/>
+
+      <% end %>
+    </div>
+  </div>
+</div>

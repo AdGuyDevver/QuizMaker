@@ -1,0 +1,20 @@
+    <table summary="Question form fields">
+
+      <tr>
+        <th><%= f.label :number, '#' %></th>
+        <td><%= f.text_area :number, size: "1x1", :value => "#{@quiz.questions.count + 1}" %></td>
+        <!-- fix line 5 so that it doesn't increment the number during update;
+             either use next_questnum method here or delete it -->
+      </tr>
+      <tr>
+        <th><%= f.label :question_text, "Question: " %></th>
+        <td><%= f.text_area :question_text, size: "100x4" %></td>
+      </tr>
+      <br/>
+      <tr>
+        <th><%= f.label :answer, "answer: " %></th>
+        <td><%= f.text_area :answer, size: "100x4" %></td>
+      </tr>
+      <%= f.hidden_field :quiz_id, :value => @question.quiz_id %>
+
+    </table>

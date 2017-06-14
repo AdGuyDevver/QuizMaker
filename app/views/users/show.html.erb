@@ -1,0 +1,70 @@
+<h1>My Profile</h1>
+<%=  link_to "Edit My Profile", edit_user_path %><br/>
+
+<table summary="User detail view">
+  <tr>
+    <th>Username:</th>
+    <td><%= @user.username %></td>
+  </tr>
+  <tr>
+    <th>Name:</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>Email:</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <% if current_user && current_user.is_super_admin?(current_user) %> <!-- DRY -->
+    <tr>
+      <th>Admin:</th>
+      <td><%= @user.is_admin %></td>
+      <th>SuperAdmin:</th>
+      <td><%= @user.is_super_admin %></td>
+    </tr>
+  <% end %>
+
+  <tr>
+      <% if @user.quizzes.count == 0 %>
+        <%= link_to "Add Your First Quiz", new_user_quiz_path(:user_id => current_user.id) %>
+      <% else %>
+        <th><br/>My Quizzes:</th>
+        <tr class="header">
+          <th>ID  |</th>
+          <th>Title  |</th>
+          <th>Difficulty</th>
+          <th>| # of Questions</th>
+          <th>| Actions  </th>
+        </tr>
+        <% if @user.quizzes.count == 0 %> <!-- .quizzes.count == 0 || .quizzes.nil? -->
+          <p>"Ain't nutin here<p><br/>
+            <% else %>
+          <% @user.quizzes.each do |quiz| %> <!-- # scope this -->
+            <% if quiz.user_id == @user.id %>
+              <tr>
+                <td><%= quiz.id %></td>
+                <td><%= quiz.title %> --> </td>
+                <td><%= quiz.difficulty_level %> </td>
+                <td>  |  <%= quiz.questions.count %></td>
+                <td><%= link_to "Show", user_quiz_path(:id => quiz.id, :user_id => current_user.id) %> |
+                    <%= link_to "Edit", edit_user_quiz_path(:id => quiz.id, :user_id => current_user.id) %> |
+                    <%= link_to 'Delete', user_quiz_path(:id => quiz.id, :user_id => current_user.id),
+                                method: "delete",
+                                data: { confirm: 'Are you sure?' } %> |
+                    <%= link_to "Add questions", new_user_quiz_question_path(:quiz_id => quiz.id, :user_id => current_user.id) %> |
+                        </td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+  </tr>
+  <br/>
+</table>
+
+<br/>
+
+  <%= link_to 'Create a New Quiz', new_user_quiz_path(:user_id => current_user.id) %>
+
+</div>
+
+<br/>

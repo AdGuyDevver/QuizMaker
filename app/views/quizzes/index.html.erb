@@ -1,0 +1,37 @@
+<h1>My Quiz List</h1>
+<% if @user.quizzes.count == 0 %> <!-- .quizzes.count == 0 || .quizzes.nil? -->
+  <p>Currently you have no quizzes.<p><br/>
+    <%= link_to 'Create a Quiz', new_user_quiz_path(:user_id => current_user.id) %>
+
+  <% else %>
+    <table class="listing" summary="List of Quizzes">
+      <tr class="header">
+        <th>ID</th>
+        <th style="padding-left: 15px">Title</th>
+        <th style="padding-left: 10px">Difficulty</th>
+        <th style="padding-left: 15px"># of Questions</th>
+        <th style="padding-left: 15px">Actions  </th>
+      </tr>
+
+    <% @user.quizzes.each do |quiz| %> <!-- # scope this -->
+      <% if quiz.user_id == @user.id %>
+        <tr>
+          <td><%= quiz.id %></td>
+          <td style="padding-left: 15px"><%= link_to "#{quiz.title}", user_quiz_path(:id => quiz.id, :user_id => current_user.id) %></td>
+          <td style="padding-left: 10px"><%= quiz.difficulty_level %> </td>
+          <td style="padding-left: 15px"><%= quiz.questions.count %></td>
+          <td style="padding-left: 15px"><%= link_to "Edit", edit_user_quiz_path(:id => quiz.id, :user_id => current_user.id) %> |
+              <%= link_to 'Delete', user_quiz_path(:id => quiz.id, :user_id => current_user.id),
+                          method: "delete",
+                          data: { confirm: 'Are you sure?' } %> |
+              <%= link_to "Add questions", new_user_quiz_question_path(:quiz_id => quiz.id, :user_id => current_user.id) %> |
+                  </td>
+        </tr>
+      <% end %>
+    <% end %>
+    <%= link_to 'Create a New Quiz', new_user_quiz_path(:user_id => current_user.id) %>
+
+  <% end %>
+
+  </table>
+<br/>

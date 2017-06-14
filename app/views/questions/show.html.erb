@@ -1,0 +1,24 @@
+<% @page_title = "Show Question Details" %>
+
+<h3> Question #<%= @question.id %> for <%= @quiz.title %></h3>
+<div class="question_table">
+  <table summary="Question detail view">
+    <tr>
+      <th>Number:</th>
+      <td><%= @question.number %></td>
+    </tr>
+    <tr>
+      <th>Question:</th>
+      <td><%= @question.question_text%></td>
+    </tr>
+    <tr>
+      <th>Answer:</th>
+      <td><%= @question.answer%></td>
+    </tr>
+  </table>
+</div>
+
+<%=  link_to "Edit Question", edit_user_quiz_question_path(:id => @question.id) %>
+
+<br/>
+<%= link_to 'Back to My Quizzes', user_quizzes_path %>

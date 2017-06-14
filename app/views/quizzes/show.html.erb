@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 style="text-align: center"><%= @quiz.title %></h2>
+  <p style="text-align: center; margin-top: -6px"><%= link_to "Change Title", edit_user_quiz_path(@quiz, :user_id => current_user.id) %>
+
+<div style="text-align: center">
+  <p><strong>Created: </strong><%= @quiz.created_at.strftime("%B %d, %Y at %I:%M %p") %> EST<br/>
+    <strong>Difficulty Level: </strong><%= @quiz.difficulty_level %>     <%= link_to "|   Change Level", edit_user_quiz_path(@quiz, :user_id => current_user.id) %>
+<br/>
+  </p>
+
+</div>
+<div style="background-color: #cccccc; padding: 5px; margin-top: 10px; margin-bottom: -10px"></div>
+  <h3>Questions</h3>
+  <% if @quiz.questions.count == 0 %>
+    <p>No questions yet!</p>
+  <% else %>
+    <% @quiz.questions.each do |question| %>
+      <p>
+      <div style="border-bottom: solid 2px rgba(66,133,244,.8);">
+        <strong>#:</strong>
+        <%= question.number %><br/>
+        <strong>Q:</strong>
+        <%= question.question_text %><br/>
+        <strong>A:</strong>
+        <%= question.answer %><br/>
+        <%= link_to 'Edit Question', edit_user_quiz_question_path({:id => question.id, :quiz_id => @quiz.id}) %>  |
+        <%= link_to 'Delete Question', user_quiz_question_path(:id => question.id, :quiz_id => @quiz.id),
+            method: "delete",
+            data: { confirm: 'Are you sure?' } %>  |
+      </p>
+      </div>
+      <% end %>
+    <% end %>
+<br/>
+<%= link_to "Add a New Question", new_user_quiz_question_path(:quiz_id => @quiz.id) %>
+<br/>
+<br/>
+
+<%= link_to 'Go to My Quiz List', user_quizzes_path %>
+<br/>
+</div>

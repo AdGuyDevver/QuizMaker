@@ -1,0 +1,33 @@
+<h1>Questions for <em><%= @quiz.title%></em> </h1>
+<h3>Total # of Questions:  <%= @quiz.questions.count %></h3>
+  <table summary="Quiz detail view">
+    <tr>
+      <th>Number  |</th>
+      <th>Quiz ID  |</th>
+      <th>Question ID  |</th>
+      <th>Question  |</th>
+      <th>Answer  |</th>
+      <th>Make Changes</th>
+    </tr>
+    <% @questions.each do |question| %>
+    <% if question.quiz_id == @quiz.id %>
+      <tr>
+        <td><%= question.number %></td>
+        <td><%= question.quiz_id %></td>
+        <td><%= question.id %></td>
+        <td><%= question.question_text %></td>
+        <td><%= question.answer %></td>
+        <td><%=link_to 'Edit', edit_user_quiz_question_path({:id => question.id}) %>
+          | <%=link_to 'Delete', user_quiz_question_path({:id => question.id, :quiz_id => @quiz.id}),
+          method: :delete,
+          data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+      <% end %>
+
+    <% end %>
+  </table>
+
+<div class='fix'>
+<%= link_to 'Add a Question', {:action=>"new", :controller=>"questions", :quiz_id=>@quiz.id} %>
+</div>
+<%= link_to 'Back to all quizzes', user_quizzes_path %>

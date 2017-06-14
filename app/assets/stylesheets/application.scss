@@ -1,0 +1,50 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ /* MIXINs */
+
+ @mixin box_sizing {
+   -moz-box-sizing:    border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing:         border-box;
+ }
+
+ /* CLASSES */
+
+.notice {color: red}
+.cancel_link {text-align: center; padding-top: 10px}
+
+ /* IDs */
+
+#breadcrumb { border-bottom: 5px solid black; color: blue }
+
+  /* used in development mode to visually indicate issues to be addressed*/
+#current_problem {background-color: yellow}
+#fix { background-color: purple; color: yellow }
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
+}

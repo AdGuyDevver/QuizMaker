@@ -1,0 +1,23 @@
+<h1>Editing Main Details for: <%= @quiz.title %></h1>
+<p>Created <%=@quiz.created_at%></p>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div style="width: 300px">
+      <%= form_for :quiz, url: user_quiz_path, method: 'patch' do |f| %>
+
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+
+        <div class="form-buttons">
+          <%= submit_tag "Update Quiz", class: "btn btn-primary" %>
+        </div>
+        <div class="cancel_link">
+          <%= link_to "Cancel", :back %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Back', user_quizzes_path(@quiz) %>

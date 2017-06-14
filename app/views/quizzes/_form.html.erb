@@ -1,0 +1,19 @@
+    <table summary="Quiz form fields">
+      <tr>
+        <th><%= f.label(:title, 'Quiz Title') %></th>
+        <td><%= f.text_field(:title, class: 'form-control') %></td>
+      </tr>
+      <tr style="text-align: center">
+        <td><%= f.label(:difficulty_level, 'Difficulty Level') %></td>
+
+        <td>
+          <%= f.radio_button(:difficulty_level, "easy") %>
+          <%= label_tag(:difficulty_level, "easy") %>
+          <%= f.radio_button(:difficulty_level, "medium") %>
+          <%= label_tag(:difficulty_level, "medium") %>
+          <%= f.radio_button(:difficulty_level, "hard") %>
+          <%= label_tag(:difficulty_level, "hard") %>
+          <%= f.hidden_field :user_id, :value => @user.id %>
+        </td>
+      </tr>
+    </table>

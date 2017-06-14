@@ -1,0 +1,35 @@
+    <table summary="User form fields">
+      <tr>
+        <th><%= f.label(:first_name, 'First Name') %></th>
+        <td><%= f.text_field(:first_name, class: 'form-control') %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:last_name, 'Last Name') %></th>
+        <td><%= f.text_field(:last_name, class: 'form-control') %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:email, 'Email Address') %></th>
+        <td><%= f.text_field(:email, class: 'form-control') %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:username, 'Username') %></th>
+        <td><%= f.text_field(:username, class: 'form-control') %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:password, 'Choose a Password') %></th>
+        <td><%= f.password_field(:password, class: 'form-control') %></td>
+      </tr>
+
+      <!-- Only Super Admin can update permission/status -->
+      <% if logged_in? && current_user.is_super_admin?(current_user) %>
+        <tr>
+          <th><%= f.label(:is_admin, 'Admin') %></th>
+          <td><%= f.check_box(:is_admin) %></td>
+        </tr>
+        <tr>
+          <th><%= f.label(:is_super_admin, 'SuperAdmin') %></th>
+          <td><%= f.check_box(:is_super_admin) %></td>
+        </tr>
+      <% end %>
+
+    </table>

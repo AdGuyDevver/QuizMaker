@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Welcome to QuizMaker</h1>
+  <h4>A very simple Ruby on Rails web app by AdGuyDevver</h4>
+  <br/>
+  <h2>Okay, Quizmakers</h2>
+  <h4>I need your help testing the app I made. Will you help me?</h4>
+  <p>It's a pretty simple app that lets you create a quiz.<br/>
+    The next thing I am going to build will be the interface<br/>
+    where you can actually take the quiz that you build.</p>
+
+  <% if !logged_in? %>
+    <div class="btn btn-secondary"><%= link_to 'Log In', sessions_new_path %></div>
+    <br/>
+    <p>Don't have an account yet?<br/>
+    <%= link_to 'Create a QuizMaker Account', new_user_path %></p>
+  <% end %>
+
+</ul>
+</div>

@@ -1,0 +1,5 @@
+<h1>Questions#delete</h1>
+<p><%= link_to 'Destroy', user_quiz_question_path(:id => @question.id, :quiz_id => @quiz.id),
+        method: :delete,
+        data: { confirm: 'Are you sure?' } %></p>
+<%= link_to 'Back to all questions', user_quiz_questions_path %>

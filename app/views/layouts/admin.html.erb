@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QuizMaker</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <div id="header">
+    <h5>QuizMaker Admin <%= link_to 'home', root_path %></h5>
+  </div>
+  <nav>
+    <div class="breadcrumb">
+      <% if logged_in? %>
+        <p>Logged in as <strong><%= current_user.username %></strong> |
+        <%= link_to "Log out", logout_path %> |
+        <%= link_to "Profile", user_path(current_user)%></p>
+      <% end %>
+
+    </div>
+  </nav>
+</head>
+<body style="background-color: #eeeeee;">
+  <div id="main">
+    <% if !flash[:notice].blank? %>
+      <div class="notice">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <div id="content" style="margin: 10px; padding: 20px; background-color: white;">
+      <%= yield %>
+    </div>
+
+  </div>
+
+</body>
+
+<footer>
+  <br/>
+  <% if logged_in? && current_user.is_super_admin?(current_user) %>
+    <%= link_to 'All Users', users_path %>
+  <% end %>
+    <%= debug(params) if Rails.env.development? %>
+</footer>
+
+</html>

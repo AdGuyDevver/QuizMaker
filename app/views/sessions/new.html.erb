@@ -1,0 +1,40 @@
+<% provide(:title, "Log in") %>
+<h5>QuizMaker Admin <%= link_to 'home', root_path %></h5>
+
+<h1>Log in</h1>
+
+<% if !flash.now[:danger].blank? %>
+  <div class="notice">
+    <%= flash[:danger] %>
+  </div>
+<% end %>
+
+<% if !flash.now[:notice].blank? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div style="width: 300px">
+    <%= form_for(:session, url: { action: "create" }) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+  <br/>
+  <p>Don't have an account yet?<br/>
+  <%= link_to 'Create a QuizMaker Account', new_user_path %></p>
+  <%= link_to "Cancel", :back %>
+</div>
+
+
+</div>
